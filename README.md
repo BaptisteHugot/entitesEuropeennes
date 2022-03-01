@@ -1,4 +1,4 @@
-# zonesNumerotation
+# entitesEuropeennes
 Ce programme affiche une carte montrant les différents pays composant les différentes entités européennes, notamment aux niveaux administratifs suivants :
 * Union européenne
 * Espace économique européen
