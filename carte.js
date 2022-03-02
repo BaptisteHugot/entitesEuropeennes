@@ -228,7 +228,7 @@ function initMap() {
   * @param Propriétés
   */
   info.update = function(props) {
-    this._div.innerHTML = '<h4>Pays</h4>' + (props ?
+    this._div.innerHTML = '<h4>Etat</h4>' + (props ?
       '<b>' + props.Pays_Europe_Nom_pays : '<br />');
     };
 
