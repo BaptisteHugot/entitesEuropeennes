@@ -37,3 +37,18 @@
   /* Il est nécessaire que la carte ait une hauteur sinon elle n'apparaîtra pas */
   width: 56vw;
 }
+
+.box {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.tr{
+  border: solid;
+  width: 250px;
+  border-collapse: collapse;
+  margin-left: 10px;
+  margin-top: -1px;
+}

@@ -1,5 +1,5 @@
-# zonesNumerotation
-Ce programme affiche une carte montrant les différents pays composant les différentes entités européennes, notamment aux niveaux administratifs suivants :
+# entitesEuropeennes
+Ce programme affiche une carte et un tableau montrant les différents pays composant les différentes entités européennes, notamment aux niveaux administratifs suivants :
 * Union européenne
 * Espace économique européen
 * Association européenne de libre échange
@@ -8,7 +8,6 @@ Ce programme affiche une carte montrant les différents pays composant les diff�
 * Espace Schengen
 * Union douanière
 * Conseil de l'Europe
-<a/>
 
 ## Exemple
 Un exemple complet est disponible sur [ma page personnelle GitHub](https://baptistehugot.github.io/entitesEuropennes/).

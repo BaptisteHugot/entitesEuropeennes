@@ -19,6 +19,15 @@ var layer_zoneEuro;
 var info;
 var control;
 
+var countries_AELE = [];
+var countries_conseilEurope = [];
+var countries_EEE = [];
+var countries_marcheCommun = [];
+var countries_schengen = [];
+var countries_UE = [];
+var countries_unionDouaniere = [];
+var countries_zoneEuro = [];
+
 /**
 * Fonction qui définit le style qui sera affiché en fonction d'une donnée particulière
 * @param Le fichier GeoJson en entrée
@@ -94,6 +103,92 @@ function onEachFeature(feature, layer) {
 }
 
 /**
+ * Fonction qui récupère la liste des pays pour chaque institution et les inclut dans une liste spécifique
+ */
+function getCountries(){
+  fetch('./Donnees/donneesSansGeometrie.json') // On récupère le fichier
+    .then(response => response.json())
+    .then(data => { // On créé les tableaux correspondants à chaque entité
+      for(const country of data.AELE){
+       countries_AELE.push(country);
+      }
+      for(const country of data.Conseil_Europe){
+       countries_conseilEurope.push(country);
+      }
+      for(const country of data.EEE){
+       countries_EEE.push(country);
+      }
+      for(const country of data.Marche_commun){
+        countries_marcheCommun.push(country);
+      }
+      for(const country of data.Espace_Schengen){
+        countries_schengen.push(country);
+      }
+      for(const country of data.UE){
+        countries_UE.push(country);
+      }
+      for(const country of data.Union_douaniere){
+        countries_unionDouaniere.push(country);
+      }
+      for(const country of data.Zone_Euro){
+        countries_zoneEuro.push(country);
+      }
+      generateTable(countries_UE); // On génère ensuite un tableau, nécessaire pour s'assurer que les tableaux sont bien remplis
+    }
+  );
+}
+
+/**
+ * Fonction qui affiche le tableau avec la liste des pays pour chaque institution
+ * @param La liste des pays à afficher 
+ */ 
+function generateTable(countries){
+  var table = document.createElement("div");
+  table.classList.add("box");
+
+  for(var i=0;i<countries.length;i++){
+    var tr = document.createElement("tr");
+    tr.classList.add("tr");
+    tr.innerHTML = countries[i];
+    table.appendChild(tr);
+  }
+
+  var dvTable = document.getElementById("dvTable");
+  dvTable.innerHTML = "";
+  dvTable.appendChild(table);
+}
+
+/**
+ * Fonction qui sert à afficher la carte et à ne pas afficher le tableau
+ */ 
+function showMap(){
+  var radioButton = document.getElementById("affichageCarte");
+  var dvMap = document.getElementById("map");
+  var dvTable = document.getElementById("dvTable");
+  var dvControl = document.getElementById("control");
+  var dvControlTable = document.getElementById("controlTable");
+  dvControl.style.display = "inline";
+  dvMap.style.display = "inline";
+  dvTable.style.display = "none";
+  dvControlTable.style.display = "none";
+}
+
+/**
+ * Fonction qui sert à afficher le tableau et à ne pas afficher la carte
+ */ 
+function showTable(){
+  var radioButton = document.getElementById("affichageCarte");
+  var dvMap = document.getElementById("map");
+  var dvTable = document.getElementById("dvTable");
+  var dvControl = document.getElementById("control");
+  var dvControlTable = document.getElementById("controlTable");
+  dvControl.style.display = "none";
+  dvMap.style.display = "none";
+  dvControlTable.style.display = "inline";
+  dvTable.style.display = "inline";
+}
+
+/**
 * Fonction qui déplace des éléments au format HTML dans un nouveau parent
 * @param Eléments à déplacer
 * @param Le nouvel élément où l'élément "el" sera déplacé
@@ -158,7 +253,6 @@ function initMap() {
     onEachFeature: onEachFeature
   });
 
-
   var overlayMaps = {
     "Union européenne": layer_UE,
     "Espace économique européen": layer_EEE,
@@ -172,7 +266,7 @@ function initMap() {
 
   control = L.control.layers(overlayMaps, null, {
     collapsed: false
-  }); // On ajoute les trois couches précédentes à la carte, en les rendant exclusives
+  }); // On ajoute les couches précédentes à la carte, en les rendant exclusives
 
   // On gère la géolocalisation de l'utilisateur
   var location = L.control.locate({
@@ -228,7 +322,7 @@ function initMap() {
   * @param Propriétés
   */
   info.update = function(props) {
-    this._div.innerHTML = '<h4>Pays</h4>' + (props ?
+    this._div.innerHTML = '<h4>Territoire</h4>' + (props ?
       '<b>' + props.Pays_Europe_Nom_pays : '<br />');
     };
 
@@ -283,5 +377,6 @@ function initMap() {
   * Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
   */
   window.onload = function() {
+    getCountries();
     initMap();
   };
