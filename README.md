@@ -10,7 +10,7 @@ Ce programme affiche une carte et un tableau montrant les différents pays compo
 * Conseil de l'Europe
 
 ## Exemple
-Un exemple complet est disponible sur [ma page personnelle GitHub](https://baptistehugot.github.io/entitesEuropennes/).
+Un exemple complet est disponible sur [ma page personnelle GitHub](https://baptistehugot.github.io/entitesEuropeennes/).
 
 ## Ecrit avec
 * [Javascript](https://www.ecma-international.org/publications/standards/Ecma-262.htm) - Le langage de programmation utilisé pour gérer la gestion de la carte et des bibliothèques
