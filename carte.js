@@ -16,6 +16,7 @@ var layer_schengen;
 var layer_UE;
 var layer_unionDouaniere;
 var layer_zoneEuro;
+var layer_roaming;
 var info;
 var control;
 
@@ -27,6 +28,7 @@ var countries_schengen = [];
 var countries_UE = [];
 var countries_unionDouaniere = [];
 var countries_zoneEuro = [];
+var countries_roaming = [];
 
 /**
 * Fonction qui définit le style qui sera affiché en fonction d'une donnée particulière
@@ -77,6 +79,7 @@ function resetHighlight(e) {
   layer_UE.resetStyle(e.target);
   layer_unionDouaniere.resetStyle(e.target);
   layer_zoneEuro.resetStyle(e.target);
+  layer_roaming.resetStyle(e.target);
 
   info.update();
 }
@@ -132,6 +135,9 @@ function getCountries(){
       }
       for(const country of data.Zone_Euro){
         countries_zoneEuro.push(country);
+      }
+      for(const country of data.roaming){
+        countries_roaming.push(country);
       }
       generateTable(countries_UE); // On génère ensuite un tableau, nécessaire pour s'assurer que les tableaux sont bien remplis
     }
@@ -252,6 +258,10 @@ function initMap() {
     style: style,
     onEachFeature: onEachFeature
   });
+  layer_roaming = new L.GeoJSON.AJAX("./Donnees/roaming.json", {
+    style: style,
+    onEachFeature: onEachFeature
+  });
 
   var overlayMaps = {
     "Union européenne": layer_UE,
@@ -261,7 +271,8 @@ function initMap() {
     "Zone Euro": layer_zoneEuro,
     "Espace Schengen": layer_schengen,
     "Union douanière": layer_unionDouaniere,
-    "Conseil de l'Europe": layer_conseilEurope
+    "Conseil de l'Europe": layer_conseilEurope,
+    "Itinérance": layer_roaming
   };
 
   control = L.control.layers(overlayMaps, null, {
