@@ -8,6 +8,7 @@ Ce programme affiche une carte et un tableau montrant les différents pays compo
 * Espace Schengen
 * Union douanière
 * Conseil de l'Europe
+* Itinérance comme à la maison sur les réseaux mobiles
 
 ## Exemple
 Un exemple complet est disponible sur [ma page personnelle GitHub](https://baptistehugot.github.io/entitesEuropeennes/).
